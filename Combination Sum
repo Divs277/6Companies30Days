@@ -1,0 +1,22 @@
+class Solution {
+public:
+    vector<vector<int>> combinationSum3(int k, int n) {
+        vector<vector<int>> ComSum;
+        vector<int> CurrSum;
+        PossibleCombinations(1, k, n, ComSum, CurrSum);
+        return ComSum;
+    }
+   void PossibleCombinations(int start, int k, int target, vector<vector<int>>& ComSum, vector<int>& CurrSum){
+        if (target==0 && CurrSum.size()==k){
+            ComSum.push_back(CurrSum);
+            return;
+        }
+        for(int i=start;i<=9;i++){
+            if(find(CurrSum.begin(),CurrSum.end(),i)==CurrSum.end()){
+                CurrSum.push_back(i);
+                PossibleCombinations(i+1,k,target-i,ComSum,CurrSum);
+                CurrSum.pop_back();
+            }
+        }
+    }
+};
