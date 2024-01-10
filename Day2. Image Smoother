@@ -1,0 +1,30 @@
+class Solution {
+public:
+    vector<vector<int>>neighbours{
+         {-1,-1}, {-1,0}, {-1,1},
+         {0,-1}, {0,0}, {0,1},
+         {1,-1}, {1,0}, {1,1}   
+    };
+    vector<vector<int>> imageSmoother(vector<vector<int>>& img) {
+    int row=img.size();
+    int column=img[0].size();  
+    vector<vector<int>>result(row, vector<int>(column, 0));  
+    for(int i=0; i<row; i++){
+        for(int j=0; j<column; j++){
+            int sum_neighbours=0;
+            int no_neighbours=0;
+            for(auto &it : neighbours){
+                int x= i + it[0];
+                int y= j + it[1];
+                
+                if(x>=0 && x<row && y>=0 && y<column){
+                    sum_neighbours+= img[x][y];
+                    no_neighbours++;
+                }
+            } result[i][j]=sum_neighbours/no_neighbours;
+        }
+    }
+    return result;
+    
+    }
+};
