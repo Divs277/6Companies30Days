@@ -1,0 +1,36 @@
+class Solution {
+public:
+    int shoppingOffers(vector<int>& price, vector<vector<int>>& special, vector<int>& needs) {
+        int cost=0;
+        for(int i=0;i<price.size();i++){
+            cost+=needs[i]*price[i];
+        }
+        
+       
+    for(int j=0;j<special.size();j++){
+            if (specialofferrequired(special[j], needs)) {
+    for (int k = 0; k < needs.size(); k++) {
+        needs[k] =needs[k] -special[j][k];
+    }
+    cost = min(cost, special[j][needs.size()] + shoppingOffers(price, special, needs));
+    for (int k = 0; k < needs.size(); k++) {
+        needs[k] =needs[k]+special[j][k];
+    }
+}
+        }           
+return cost;
+         
+    }
+         
+        bool specialofferrequired(vector<int>& special, vector<int>& needs){
+        for(int i=0;i<needs.size();i++){
+            if(needs[i]<special[i]){
+                return false;
+            } 
+        }
+           return true;
+        }
+        
+
+
+    };
