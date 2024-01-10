@@ -1,0 +1,15 @@
+class Solution {
+public:
+    bool checkOverlap(int radius, int xCenter, int yCenter, int x1, int y1, int x2, int y2) {
+        int X=min(x2,max(xCenter,x1));
+        int Y=min(y2,max(yCenter,y1));
+        int dx=X-xCenter;
+        int dy=Y-yCenter;
+    
+        
+        if(((dx*dx)+(dy*dy))<=radius*radius){return true;
+        }
+        else return false;
+
+    }
+};
