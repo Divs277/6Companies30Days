@@ -1,0 +1,21 @@
+class Solution {
+public:
+    int maxEnvelopes(vector<vector<int>>& envelopes) {
+        sort(envelopes.begin(),envelopes.end(),[] (auto &a, auto &b){
+            return a[0]==b[0]? a[1]>b[1] : a[0]<b[0];
+        });
+
+  
+
+    vector<int>lis;
+    for(auto x: envelopes){
+        auto it=lower_bound(lis.begin(),lis.end(),x[1]);
+            if(it==lis.end()) {
+                lis.push_back(x[1]);
+            } else {
+                *it = x[1];
+            }
+    }
+    return lis.size();
+    }
+};
