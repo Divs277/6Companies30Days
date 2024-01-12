@@ -1,0 +1,55 @@
+class Solution {
+    int num;
+    vector<int>total_cum_points;
+    vector<vector<int>>rects;
+public:
+    Solution(vector<vector<int>>& rects) {
+        num=0;
+        this->rects=rects;
+        for(vector<int>rect: rects){
+            num+= (rect[2]-rect[0]+1) * (rect[3]-rect[1]+1);
+            total_cum_points.push_back(num);
+
+        }
+    }
+    
+   vector<int> pick() {
+    int pt = rand() % num;
+    int low = 0, high = rects.size() - 1;
+
+    while (low < high) {
+        int mid = low + (high - low) / 2;
+        if (pt >= total_cum_points[mid]) {
+            low = mid + 1;
+        } else {
+            high = mid;
+        }
+    }
+
+    vector<int>& rect = rects[low];
+    int x_pts = rect[2] - rect[0] + 1;
+    int y_pts = rect[3] - rect[1] + 1;
+    long long selected_rect_pts = static_cast<long long>(x_pts) * static_cast<long long>(y_pts);
+
+    int start_pt = total_cum_points[low] - selected_rect_pts;
+    int index = pt - start_pt;
+
+    return {rect[0] + index % x_pts, rect[1] + index / x_pts};
+}
+
+
+        
+    
+};
+
+
+/**
+ * Your Solution object will be instantiated and called as such:
+ * Solution* obj = new Solution(rects);
+ * vector<int> param_1 = obj->pick();
+ */
+/**
+ * Your Solution object will be instantiated and called as such:
+ * Solution* obj = new Solution(rects);
+ * vector<int> param_1 = obj->pick();
+ */
