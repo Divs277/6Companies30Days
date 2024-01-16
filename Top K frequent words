@@ -1,0 +1,23 @@
+class Solution {
+public:
+    vector<string> topKFrequent(vector<string>& words, int k) {
+        unordered_map<string,int>mymap;
+        vector<pair<string,int>>myfrequent;
+        vector<string>result;
+        for(auto x: words){
+            mymap[x]++;
+        }
+        for(auto word: mymap){
+            myfrequent.push_back(word);
+        }
+        auto comparator=[&](auto &x, auto &y){
+            if(x.second==y.second){return x.first<y.first;}
+            return x.second>y.second;
+        };
+        sort(myfrequent.begin(), myfrequent.end(), comparator);
+        for(auto it: myfrequent){result.push_back(it.first);
+        k--;
+        if(k==0){break;}}
+        return result;
+    }
+};
