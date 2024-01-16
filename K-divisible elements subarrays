@@ -1,0 +1,21 @@
+class Solution {
+public:
+    int countDistinct(vector<int>& nums, int k, int p) {
+        set<vector<int>>myset;
+        for(int i=0;i<nums.size();i++){
+            for(int j=i;j<nums.size();j++){
+                vector<int>arr;
+                int count=0;
+                for(int a=i;a<=j;a++){
+                    arr.push_back(nums[a]);
+                    if(nums[a]%p==0){
+                        count++;
+                    }
+                }
+                if(count<=k){
+                    myset.insert(arr);
+                }
+            }
+        } return myset.size();
+    }
+};
