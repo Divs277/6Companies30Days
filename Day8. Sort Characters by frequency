@@ -1,0 +1,25 @@
+class Solution {
+public:
+    string frequencySort(string s) {
+        string result="";
+        unordered_map<string,int>mymap;
+        for(int i=0;i<s.length();i++){
+            mymap[s.substr(i, 1)]++;
+        }
+        vector<pair<string,int>>myfrequent;
+        for(auto it: mymap){myfrequent.push_back(it);}
+        auto comparator=[&](auto &x, auto &y){
+            if(x.second==y.second){return x.first<y.first;}
+            return x.second>y.second;};
+            sort(myfrequent.begin(),myfrequent.end(),comparator);
+            for(auto it: myfrequent){
+                if(it.second>1){
+                    for(int j=0;j<it.second;j++){
+                        result+=it.first;
+                    }
+                }
+                else result+=it.first;
+            }
+            return result;
+    }
+};
