@@ -1,0 +1,35 @@
+class DataStream {
+public:
+map<int,int>mymap;
+queue<int>myqueue;
+int V, K;
+    DataStream(int value, int k) {
+        V=value;
+        K=k;
+    }
+    
+    bool consec(int num) {
+        myqueue.push(num);
+        mymap[num]++;
+        if(myqueue.size()>=K){
+            if(myqueue.size()>K){
+                mymap[myqueue.front()]--;
+                if(mymap[myqueue.front()]==0){
+                    mymap.erase(myqueue.front());
+                }
+                myqueue.pop();
+            }
+            if(mymap.size()==1 && mymap[V]>0){
+                return true;
+            }
+            else return false;
+        }
+        else return false;
+    }
+};
+
+/**
+ * Your DataStream object will be instantiated and called as such:
+ * DataStream* obj = new DataStream(value, k);
+ * bool param_1 = obj->consec(num);
+ */
