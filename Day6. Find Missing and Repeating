@@ -1,0 +1,57 @@
+//{ Driver Code Starts
+#include <bits/stdc++.h>
+
+using namespace std;
+
+// } Driver Code Ends
+class Solution{
+public:
+    long long Duple(vector<int>arr){
+        sort(arr.begin(),arr.end());
+        for(int i=0;i<arr.size()-1;i++){
+            if(arr[i]==arr[i+1]){return arr[i];}
+        }
+    };
+    
+    long long sum(vector<int>arr){
+        long long int Sum=0;
+        for(int i=0;i<arr.size();i++){
+            Sum+=arr[i];
+            
+        } return Sum;
+    }
+    vector<long> findTwoElement(vector<int> arr, int n) {
+        // code here
+        vector<long>result;
+        long long int y=n;
+        long long B=Duple(arr);
+        long long int Sum=sum(arr);
+        Sum-=B;
+        long long Exp_Sum=(y*(y+1))/2;
+        long long int A=Exp_Sum-Sum;
+        result.push_back(B);
+        result.push_back(A);
+        return result;
+        
+    }
+};
+
+//{ Driver Code Starts.
+
+int main() {
+    int t;
+    cin >> t;
+    while (t--) {
+        int n;
+        cin >> n;
+        vector<int> a(n);
+        for (int i = 0; i < n; i++) {
+            cin >> a[i];
+        }
+        Solution ob;
+        auto ans = ob.findTwoElement(a, n);
+        cout << ans[0] << " " << ans[1] << "\n";
+    }
+    return 0;
+}
+// } Driver Code Ends
