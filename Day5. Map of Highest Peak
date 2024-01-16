@@ -1,0 +1,30 @@
+class Solution {
+public:
+    vector<vector<int>> highestPeak(vector<vector<int>>& isWater) {
+        int Row=isWater.size();
+        int Column=isWater[0].size();
+        vector<vector<int>>Result(Row,vector<int>(Column,INT_MAX));
+        queue<pair<int,int>>q;
+        for(int i=0;i<Row;i++){
+            for(int j=0;j<Column;j++){
+                if(isWater[i][j]==1){
+                    q.push({i,j});
+                    Result[i][j]=0;
+                }
+            }
+        }
+        while(!q.empty()){
+            int r=q.front().first;
+            int c=q.front().second;
+            q.pop();
+            int dr[4]={0,0,-1,1};
+            int dc[4]={-1,1,0,0};
+            for(int i=0;i<4;i++){
+                int rr=r+dr[i];
+                int cc=c+dc[i];
+                if(rr>=0 && rr<Row && cc>=0 && cc<Column && Result[rr][cc]>1+Result[r][c]){Result[rr][cc]=1+Result[r][c];
+                q.push({rr,cc});}
+            }
+        } return Result;
+    }
+};
