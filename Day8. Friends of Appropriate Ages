@@ -1,0 +1,22 @@
+class Solution {
+public:
+bool friendrequest(int x, int y){
+    if(  (y<=(0.5*x)+7) || y>x || (y>100 && x<100)){return false;}
+    else{return true;}
+}
+    int numFriendRequests(vector<int>& ages) {
+        unordered_map<int,int>mymap;
+        for(int &age: ages){
+            mymap[age]++;
+            }
+            int result=0;
+            for(auto &x: mymap){
+                for(auto &y: mymap){
+                    if(friendrequest(x.first,y.first)){
+                        result+=x.second*(y.second-(x.first==y.first ? 1:0));
+                    }
+                }
+            }
+            return result;
+    }
+};
